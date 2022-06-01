@@ -32,6 +32,20 @@ class Lesson_Content(db.Model):
     written_content = db.Column(db.String(1250), nullable=False)
     image = db.Column(db.String(50000))
 
+    def __reprLessons__(self):
+        return f'<Lesson_Content {self.title}>'
+
+    def serializeLessons(self):
+        return {
+            "user": self.user_id,
+            "title": self.title,
+            "content": self.written_content,
+            
+#             "first_name": self.first_name,
+#             "last_name": self.last_name,
+#             # do not serialize the password, its a security breach
+        }
+
 class Assessment(db.Model):
     __tablename__ = 'assessment'
     id = db.Column(db.Integer, primary_key=True)
