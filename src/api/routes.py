@@ -23,7 +23,7 @@ def handle_hello():
     return jsonify(response_body), 200
 
 @api.route('/users', methods=['POST'])
-def add_user(newmember):
+def add_user():
 
     # User.append(newmember)
     body_request = request.get_json()
@@ -32,13 +32,13 @@ def add_user(newmember):
 
 
     new_user = User(
-        email = email_request
+        email = email_request,
         password = password_request
     )
 
     db.session.add(new_user)
     db.session.commit()
-    return None, 200
+    return "User Added", 200
 
 @api.route('/lessons', methods=['POST', 'GET'])
 def handle_lessons():
