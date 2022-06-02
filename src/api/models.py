@@ -40,7 +40,8 @@ class Lesson_Content(db.Model):
         return {
             "user": self.user_id,
             "title": self.title,
-            "content": self.written_content,
+            "written_content": self.written_content,
+            "date": self.date,
             
 #             "first_name": self.first_name,
 #             "last_name": self.last_name,

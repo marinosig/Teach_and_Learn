@@ -40,7 +40,7 @@ def add_user():
     db.session.commit()
     return "User Added", 200
 
-@api.route('/lessons', methods=['POST', 'GET'])
+@api.route('/lessons', methods=['GET'])
 def handle_lessons():
 
     lessons = Lesson_Content.query.all()
@@ -53,3 +53,23 @@ def handle_lessons():
         response_body['lessons'].append(lesson.serializeLessons())
 
     return jsonify(response_body), 200
+
+@api.route('/lessons', methods=['POST'])
+def add_lesson():
+
+    # User.append(newmember)
+    body_request = request.get_json()
+    title_request = body_request.get("title", None)
+    content_request = body_request.get("written_content", None)
+    date_request = body_request.get("date", None)
+
+
+    new_content = Lesson_Content(
+        title = title_request,
+        written_content = content_request,
+        date = date_request
+    )
+
+    db.session.add(new_content)
+    db.session.commit()
+    return "Lesson Content Added", 200
