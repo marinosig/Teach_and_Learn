@@ -2,17 +2,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
+			users: [
+				
+			],
+			lessons: [
+
+			],
+			assessment: [
+
 			]
 		},
 		actions: {
@@ -21,12 +18,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
-			getMessage: () => {
+			getUsersData: () => {
 				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/hello")
+				fetch("https://3001-brunomorais-buildhomewo-nt2arfayahh.ws-eu46.gitpod.io/api/users")
 					.then(resp => resp.json())
-					.then(data => setStore({ message: data.message }))
-					.catch(error => console.log("Error loading message from backend", error));
+					.then(dataUsers => setStore({ 
+						users: [...getStore().users, dataUsers]
+					 }))
+				
+					.catch(error => console.log("Error loading message from backend Users", error));
 			},
 			changeColor: (index, color) => {
 				//get the store
