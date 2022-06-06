@@ -40,22 +40,15 @@ export const LandingPage = () => {
   return (
 		<div className="container-fluid">
 			<div><h3 style={{ color: "#b51616" }}> USERS </h3>
-			<div className="d-flex align-content-start flex-wrap ">
-			{showUsers}
-			</div>
+			  <div className="d-flex align-content-start flex-wrap ">
+			    {showUsers}
+			  </div>
 			</div>
       <div><h3 style={{ color: "#b51616" }}> LESSONS </h3>
-			<div className="d-flex align-content-start flex-wrap ">
-			{showLessons}
+        <div className="d-flex align-content-start flex-wrap ">
+        {showLessons}
+        </div>
 			</div>
-			</div>
-			</div>
-
-      
-      )  
-
-  
-
-  
-
+		</div>
+      )
 };
