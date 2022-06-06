@@ -28,6 +28,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 					.catch(error => console.log("Error loading message from backend Users", error));
 			},
+			getLessonsData: () => {
+				// fetching data from the backend
+				fetch("https://3001-brunomorais-buildhomewo-nt2arfayahh.ws-eu46.gitpod.io/api/lessons")
+					.then(resp => resp.json())
+					.then(dataLesson_Content => setStore({ 
+						lessons: [...getStore().lessons, dataLesson_Content]
+					 }))
+				
+					.catch(error => console.log("Error loading message from backend Lessons", error));
+			},
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
