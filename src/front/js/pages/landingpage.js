@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 import "../../styles/home.css";
+import "../../styles/index.css";
 
 export const LandingPage = () => {
   const { store, actions } = useContext(Context);

@@ -2,21 +2,43 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
-	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="d-flex container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-				</Link>
-				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary m-2">Check the Context in action</button>
-					</Link>
-					<Link to="/landingpage">
-						<button className="btn btn-success">Landing Page</button>
-					</Link>
-				</div>
-			</div>
-		</nav>
-	);
+  return (
+    <nav className="navbar navbar-light container-fluid col-10 border-bottom">
+      <div className="container-fluid py-3">
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <span className="navbar-brand mb-0 h1 align-middle text-warning">
+            20 Min Lesson{" "}
+          </span>
+        </Link>
+        <div className="ml-auto d-flex gap-3">
+          <Link to="/demo">
+            <button className="btn btn-primary">
+              Check the Context in action
+            </button>
+          </Link>
+          <Link to="/landingpage">
+            <button className="btn btn-success">Landing</button>
+          </Link>
+          <Link to="/lounge">
+            <button className="btn btn-danger">Lounge</button>
+          </Link>
+          <Link to="/lesson">
+            <button className="btn btn-danger">Lesson</button>
+          </Link>
+          <Link to="/teacherpage">
+            <button className="btn btn-danger">Teacher</button>
+          </Link>
+          <Link to="/lessonworkspace">
+            <button className="btn btn-danger">Workspace</button>
+          </Link>
+          <button className="btn btn-light" id="navbutton">
+            Login
+          </button>
+          <button className="btn btn-light" id="navbutton">
+            Sign Up
+          </button>
+        </div>
+      </div>
+    </nav>
+  );
 };
