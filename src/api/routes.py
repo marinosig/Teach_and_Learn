@@ -111,7 +111,7 @@ def add_teacher():
     why_you_teach_request = body_request.get("why_you_teach", None)
     years_experience_request = body_request.get("years_experience", None)
     fun_info_request = body_request.get("fun_info", None)
-    password_request = password_request.get("password", None)
+    password_request = body_request.get("password", None)
 
 
     new_teacher = Teacher(

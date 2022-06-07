@@ -3,8 +3,34 @@ import { Card } from "../component/card";
 import { Lessoncard } from "../component/lessoncard";
 import couch from "../../img/couch.png";
 import balloon from "../../img/balloon.png";
+import { useContext, useEffect } from "react"
+import { Context } from "../store/appContext"
+import PropTypes from "prop-types";
+
 
 export const Lounge = () => {
+  const { store, actions } = useContext(Context);
+  const listOfLessons = store?.lessons?.[0]?.lessons.map((lesson, index) => {
+    return (
+      <div key={index}>
+        <Lessoncard title={lesson.title}
+          subject={lesson.subject}
+          summary={lesson.summary} />
+      </div>
+    )
+  })
+
+  const listOfTeachers = store?.teachers?.[0]?.teachers.map((teacher, indexT) => {
+    return (
+      <div key={indexT}>
+        <Card first_name={teacher.first_name}
+        last_name={teacher.last_name}
+        subjects={teacher.subjects}
+        fun_info={teacher.fun_info} />
+      </div>
+    )
+  })
+
   return (
     <div>
       <div className="p-4 p-md-5 pb-4 text-white rounded bg-dark d-flex row flex-lg-row">
@@ -34,15 +60,7 @@ export const Lounge = () => {
         </h5>
         <div className="container-fluid col-10 pb-3">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5 g-3 pb-5">
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            {listOfTeachers}
           </div>
         </div>
       </div>
@@ -57,13 +75,7 @@ export const Lounge = () => {
         </h5>
         <div className="container-fluid col-10">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5 g-3 pb-5">
-            <Lessoncard />
-            <Lessoncard />
-            <Lessoncard />
-            <Lessoncard />
-            <Lessoncard />
-            <Lessoncard />
-            <Lessoncard />
+            {listOfLessons}
           </div>
         </div>
         <div className="p-4 p-md-5 pb-4 text-white rounded bg-dark d-flex row flex-lg-row">

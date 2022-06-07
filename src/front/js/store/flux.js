@@ -8,7 +8,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			lessons: [
 
 			],
-			assessment: [
+			teachers: [
+
+			],
+			students: [
 
 			]
 		},
@@ -37,6 +40,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 					 }))
 				
 					.catch(error => console.log("Error loading message from backend Lessons", error));
+			},
+			getTeacherData: () => {
+				// fetching data from the backend
+				fetch("https://3001-brunomorais-buildhomewo-nt2arfayahh.ws-eu46.gitpod.io/api/teacher")
+					.then(resp => resp.json())
+					.then(dataTeacher => setStore({ 
+						teachers: [...getStore().teachers, dataTeacher]
+					 }))
+				
+					.catch(error => console.log("Error loading message from backend Teacher", error));
+			},
+			getStudentData: () => {
+				// fetching data from the backend
+				fetch("https://3001-brunomorais-buildhomewo-nt2arfayahh.ws-eu46.gitpod.io/api/student")
+					.then(resp => resp.json())
+					.then(dataStudent => setStore({ 
+						students: [...getStore().students, dataStudent]
+					 }))
+				
+					.catch(error => console.log("Error loading message from backend Student", error));
 			},
 			changeColor: (index, color) => {
 				//get the store

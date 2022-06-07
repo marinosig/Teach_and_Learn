@@ -1,21 +1,29 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export const Lessoncard = () => {
+export const Lessoncard = (props) => {
   return (
     <div className="col">
     <div className="card"> {/* styles={"width: 18rem;"}> */}
     {/* <img src={avatar} className="card-img-top" alt="..."/> */}
       <div className="card-body text-center">
-        <h5 className="card-title pb-2 border-bottom border-warning">Title</h5>
-        <h6 className="card-subtitle py-2 text-muted">Subject</h6>
+        <h5 className="card-title pb-2 border-bottom border-warning">{props.title}</h5>
+        <h6 className="card-subtitle py-2 text-muted">{props.subject}</h6>
         <p className="card-text bg-light p-3 rounded-3">
-          Summary
+         {props.summary}
         </p>
         <a href="#" className="card-link">
-          Link to Lesson
+          {props.link_lesson}
         </a>
       </div>
     </div>
     </div>
   );
 };
+
+Lessoncard.propTypes = {
+  title: PropTypes.string,
+  subject: PropTypes.string,
+  summary: PropTypes.string,
+  link_lesson: PropTypes.string
+}

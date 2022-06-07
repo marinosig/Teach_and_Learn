@@ -2,8 +2,22 @@ import React from "react";
 import "../../styles/index.css";
 import avatar from "../../img/avatar.png";
 import { Lessoncard } from "../component/lessoncard";
+import { useContext, useEffect } from "react"
+import { Context } from "../store/appContext"
+import PropTypes from "prop-types";
 
 export const Teacherpage = () => {
+  const { store, actions } = useContext(Context);
+  const listOfLessons = store?.lessons?.[0]?.lessons.map((lesson, index) => {
+    return (
+      <div key={index}>
+        <Lessoncard title={lesson.title}
+          subject={lesson.subject}
+          summary={lesson.summary} />
+      </div>
+    )
+  })
+
   return (
     <div className="row py-5 px-4">
       <div className="col-md-8 mx-auto">
@@ -59,13 +73,7 @@ export const Teacherpage = () => {
                 </a> */}
             </div>
             <div className="row row-cols-md-2 row-cols-lg-3 row-cols-xxlg-4 g-2 g-md-4 g-xxlg-5">
-              <Lessoncard />
-              <Lessoncard />
-              <Lessoncard />
-              <Lessoncard />
-              <Lessoncard />
-              <Lessoncard />
-              <Lessoncard />
+              {listOfLessons}
             </div>
           </div>
           <div className="bg-dark pt-1 pe-5 pb-5 d-flex justify-content-end text-center rounded-3">
