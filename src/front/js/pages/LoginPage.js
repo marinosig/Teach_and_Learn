@@ -1,8 +1,52 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext";
+
 import { Link } from "react-router-dom";
 import "../../styles/style.css";
 
 export const LoginPage = () => {
+  const { store, actions } = useContext(Context);
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  const urlBase = " ";
+
+  const onTypeEmail = (e) => {
+    console.log(e.target.value);
+    setEmail(e.target.value);
+  };
+
+  const onTypePassword = (e) => {
+    console.log(e.target.value);
+    setPassword(e.target.value);
+  };
+
+  const onSubmitClicked = () => {
+    if (email && password) {
+      // fetch
+      onFetchLogIn(email, password);
+    } else {
+      //all
+      alert("incorrect details ");
+    }
+  };
+
+  const onFetchLogIn = (email, password) => {
+    // fetch
+    const post = {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    };
+  };
+
   return (
     <>
       <div className="container">
@@ -12,38 +56,43 @@ export const LoginPage = () => {
               <div className="myform">
                 <div className="logo mb-3">
                   <div className="col-md-12 text-center">
-                    <h1>Login</h1>
+                    <h1>Sigh In</h1>
                   </div>
                 </div>
-                <form action="" method="post" name="login">
+                <form>
                   <div className="form-group">
                     <label for="InputEmail1">Email address</label>
                     <input
-                      type="email"
-                      name="email"
+                      type="Email"
+                      name="Email"
                       className="form-control"
-                      id="email"
-                      aria-describedby="emailHelp"
-                      placeholder="Enter email"
+                      id="Email"
+                      aria-describedby="Email"
+                      placeholder="Enter Email"
+                      value={email}
+                      onChange={onTypeEmail}
                     />
                   </div>
                   <div className="form-group">
                     <label for="InputPassword">Password</label>
                     <input
-                      type="password"
-                      name="password"
-                      id="password"
+                      type="Password"
+                      name="Password"
+                      id="Password"
                       className="form-control"
-                      aria-describedby="emailHelp"
+                      aria-describedby="Password"
                       placeholder="Enter Password"
+                      value={password}
+                      onChange={onTypePassword}
                     />
                   </div>
                   <div className="col-md-12 text-center ">
                     <button
                       type="submit"
                       className=" btn btn-block mybtn btn-primary tx-tfm"
+                      onClick={onSubmitClicked}
                     >
-                      Login
+                      Continue
                     </button>
                   </div>
                   <div className="col-md-12 ">

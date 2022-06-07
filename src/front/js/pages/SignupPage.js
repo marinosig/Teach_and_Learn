@@ -1,8 +1,75 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/style.css";
 
+import { Context } from "../store/appContext";
+
 export const SignupPage = () => {
+  const { store, actions } = useContext(Context);
+
+  const URLbase = "";
+
+  const [userName, setUserName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [repeatPassword, setRepeatPassword] = useState();
+
+  const onSubmitClicked = () => {
+    console.log(" click and submit ");
+
+    if (email && password && repeatPassword) {
+      if (password === repeatPassword) {
+        onFetchSignUp(email, password);
+      } else {
+        alert("the passwords have to be iqual");
+      }
+    } else {
+      alert("information is missing");
+    }
+  };
+
+  const onFetchSignUp = (userName, email, password) => {
+    const post = {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userName: userName,
+        email: email,
+        password: password,
+      }),
+    };
+
+    console.log("info login", post);
+
+    fetch("", post)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+  };
+
+  const OnTypeUserName = (e) => {
+    console.log(e.target.value);
+    setUserName(e.target.value);
+  };
+
+  const onTypeEmail = (e) => {
+    console.log(e.target.value);
+    setEmail(e.target.value);
+  };
+
+  const onTypePassword = (e) => {
+    console.log(e.target.value);
+    setPassword(e.target.value);
+  };
+
+  const onTypeRepeatPassword = (e) => {
+    console.log(e.target.value);
+    setRepeatPassword(e.target.value);
+  };
+
   return (
     <>
       <div className="container">
@@ -13,7 +80,7 @@ export const SignupPage = () => {
                 <h1>Signup</h1>
               </div>
             </div>
-            <form action="#" name="registration" />
+            <form action="/Signuppage" method="post" name="registration" />
             <div className="form-group">
               <label for="InputEmail1">User Name</label>
               <input
@@ -23,6 +90,8 @@ export const SignupPage = () => {
                 id="Username"
                 aria-describedby="emailHelp"
                 placeholder="Enter yourname"
+                value={userName}
+                onChange={OnTypeUserName}
               />
             </div>
 
@@ -35,6 +104,8 @@ export const SignupPage = () => {
                 id="email"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
+                value={email}
+                onChange={onTypeEmail}
               />
             </div>
             <div className="form-group">
@@ -46,6 +117,21 @@ export const SignupPage = () => {
                 className="form-control"
                 aria-describedby="email"
                 placeholder="Enter Password"
+                value={email}
+                onChange={onTypePassword}
+              />
+            </div>
+            <div className="form-group">
+              <label for="InputEmail1">Conform Password</label>
+              <input
+                type="Conform password"
+                name="Conform password"
+                id="password"
+                className="form-control"
+                aria-describedby="Conform password"
+                placeholder="Enter Conform Password"
+                value={repeatPassword}
+                onChange={onTypeRepeatPassword}
               />
             </div>
             <div class="col-md-12 text-center mb-3">
