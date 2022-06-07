@@ -11,7 +11,8 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { LandingPage } from "./pages/landingpage";
 import { Content } from "./pages/content";
-import { LoginPage } from "./pages/Loginpage";
+import { LoginPage } from "./pages/LoginPage";
+import { SignupPage } from "./pages/SignupPage";
 
 //create your first component
 const Layout = () => {
@@ -40,8 +41,11 @@ const Layout = () => {
             <Route exact path="/single/:theid">
               <Single />
             </Route>
-            <Route exact path="/Loginpage">
+            <Route exact path="/loginpage">
               <LoginPage />
+            </Route>
+            <Route exact path="/SignupPage">
+              <SignupPage />
             </Route>
 
             <Route>
