@@ -13,6 +13,7 @@ import { LandingPage } from "./pages/landingpage";
 import { Content } from "./pages/content";
 import { LoginPage } from "./pages/LoginPage";
 import { SignupPage } from "./pages/SignupPage";
+import { ForgetPassword } from "./pages/ForgetPassword";
 
 //create your first component
 const Layout = () => {
@@ -46,6 +47,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/SignupPage">
               <SignupPage />
+            </Route>
+            <Route exact path="/ForgetPassword">
+              <ForgetPassword />
             </Route>
 
             <Route>

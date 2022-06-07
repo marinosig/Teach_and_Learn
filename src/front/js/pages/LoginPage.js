@@ -38,11 +38,6 @@ export const LoginPage = () => {
                       placeholder="Enter Password"
                     />
                   </div>
-                  <div className="form-group">
-                    <p className="text-center">
-                      By signing up you accept our <a href="#">Terms Of Use</a>
-                    </p>
-                  </div>
                   <div className="col-md-12 text-center ">
                     <button
                       type="submit"
@@ -70,6 +65,13 @@ export const LoginPage = () => {
                       Don't have account?{" "}
                       <Link to="/SignupPage">
                         <a id="signup">Sign up here</a>
+                      </Link>
+                    </p>
+                  </div>
+                  <div className="form-group">
+                    <p className="text-center">
+                      <Link to="/ForgetPassword">
+                        <a id="Forget">Forget Password</a>
                       </Link>
                     </p>
                   </div>
