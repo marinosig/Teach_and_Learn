@@ -10,6 +10,10 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { LandingPage } from "./pages/landingpage";
+import { Content } from "./pages/content";
+import { LoginPage } from "./pages/LoginPage";
+import { SignupPage } from "./pages/SignupPage";
+import { ForgetPassword } from "./pages/ForgetPassword";
 import { Lounge } from "./pages/lounge";
 import { Lesson } from "./pages/lesson";
 import { Teacherpage } from "./pages/teacherpage";
@@ -35,6 +39,21 @@ const Layout = () => {
             </Route>
             <Route exact path="/landingpage">
               <LandingPage />
+            </Route>
+            <Route exact path="/Content/:user_id">
+              <Content />
+            </Route>
+            <Route exact path="/single/:theid">
+              <Single />
+            </Route>
+            <Route exact path="/loginpage">
+              <LoginPage />
+            </Route>
+            <Route exact path="/SignupPage">
+              <SignupPage />
+            </Route>
+            <Route exact path="/ForgetPassword">
+              <ForgetPassword />
             </Route>
             <Route exact path="/lounge">
               <Lounge />

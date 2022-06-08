@@ -17,6 +17,14 @@ export const Navbar = () => {
             </button>
           </Link>
           <Link to="/landingpage">
+            <button className="btn btn-success">Landing Page</button>
+          </Link>
+          <Link to="/LoginPage">
+            <button className="btn btn-success">Login</button>
+          </Link>
+          <Link to="/SignupPage">
+            <button className="btn btn-success">Signup</button>
+          </Link>
             <button className="btn btn-success">Landing</button>
           </Link>
           <Link to="/lounge">
