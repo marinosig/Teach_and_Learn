@@ -77,6 +77,9 @@ export const SignupPage = () => {
           <div className="myform">
             <div className="logo mb-3">
               <div className="col-md-12 text-center">
+                <h3>
+                  <i class="fa fa-user-plus fa-2x"></i>
+                </h3>
                 <h1>Signup</h1>
               </div>
             </div>
@@ -145,9 +148,9 @@ export const SignupPage = () => {
             <div class="col-md-12 ">
               <div class="form-group">
                 <p class="text-center">
-                  <a href="src/front/js/pages/SignupPage.js" id="signin">
-                    Already have an account?
-                  </a>
+                  <Link to="/LoginPage">
+                    <a id="signin">Already have an account?</a>
+                  </Link>
                 </p>
               </div>
             </div>

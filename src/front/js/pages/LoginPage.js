@@ -56,6 +56,9 @@ export const LoginPage = () => {
               <div className="myform">
                 <div className="logo mb-3">
                   <div className="col-md-12 text-center">
+                    <h3>
+                      <i class="fa fa-user fa-4x"></i>
+                    </h3>
                     <h1>Login</h1>
                   </div>
                 </div>
