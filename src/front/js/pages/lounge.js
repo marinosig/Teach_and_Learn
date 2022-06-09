@@ -11,16 +11,18 @@ import PropTypes from "prop-types";
 export const Lounge = () => {
   const { store, actions } = useContext(Context);
   const listOfLessons = store?.lessons?.[0]?.lessons.map((lesson, index) => {
+   
     return (
       <div key={index}>
         <Lessoncard title={lesson.title}
           subject={lesson.subject}
-          summary={lesson.summary} />
+          summary={lesson.summary}/>
       </div>
     )
   })
 
   const listOfTeachers = store?.teachers?.[0]?.teachers.map((teacher, indexT) => {
+    
     return (
       <div key={indexT}>
         <Card first_name={teacher.first_name}

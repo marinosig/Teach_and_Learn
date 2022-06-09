@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export const Lessoncard = (props) => {
+  
   return (
     <div className="col">
     <div className="card"> {/* styles={"width: 18rem;"}> */}
@@ -25,5 +26,5 @@ Lessoncard.propTypes = {
   title: PropTypes.string,
   subject: PropTypes.string,
   summary: PropTypes.string,
-  link_lesson: PropTypes.string
+  link_lesson: PropTypes.number
 }

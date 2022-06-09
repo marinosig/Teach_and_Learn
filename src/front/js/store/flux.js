@@ -21,9 +21,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
+			getMessage: () => {
+                // fetching data from the backend
+                fetch(process.env.BACKEND_URL + "/api/hello")
+                    .then(resp => resp.json())
+                    .then(data => setStore({ message: data.message }))
+                    .catch(error => console.log("Error loading message from backend", error));
+			},	
+				
 			getUsersData: () => {
 				// fetching data from the backend
-				fetch("https://3001-brunomorais-buildhomewo-nt2arfayahh.ws-eu46.gitpod.io/api/users")
+				fetch("https://3001-brunomorais-buildhomewo-nt2arfayahh.ws-eu47.gitpod.io/api/users")
+				
 					.then(resp => resp.json())
 					.then(dataUsers => setStore({ 
 						users: [...getStore().users, dataUsers]
@@ -31,9 +40,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 					.catch(error => console.log("Error loading message from backend Users", error));
 			},
+				// WORK IM PROGRESS - NOT DONE
+
+			// postUsersData: () => {
+			// 	// fetching data from the backend
+			// 	fetch("https://3001-brunomorais-buildhomewo-nt2arfayahh.ws-eu47.gitpod.io/api/users", {method: "POST"})
+				
+			// 		.then(resp => resp.json())
+			// 		.then(dataUsers => setStore({ 
+			// 			users: [...getStore().users, dataUsers]
+			// 		 }))
+				
+			// 		.catch(error => console.log("Error loading message from backend Users", error));
+			// },
+
 			getLessonsData: () => {
 				// fetching data from the backend
-				fetch("https://3001-brunomorais-buildhomewo-nt2arfayahh.ws-eu46.gitpod.io/api/lessons")
+				fetch("https://3001-brunomorais-buildhomewo-nt2arfayahh.ws-eu47.gitpod.io/api/lessons")
 					.then(resp => resp.json())
 					.then(dataLesson_Content => setStore({ 
 						lessons: [...getStore().lessons, dataLesson_Content]
@@ -43,7 +66,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getTeacherData: () => {
 				// fetching data from the backend
-				fetch("https://3001-brunomorais-buildhomewo-nt2arfayahh.ws-eu46.gitpod.io/api/teacher")
+				fetch("https://3001-brunomorais-buildhomewo-nt2arfayahh.ws-eu47.gitpod.io/api/teacher")
 					.then(resp => resp.json())
 					.then(dataTeacher => setStore({ 
 						teachers: [...getStore().teachers, dataTeacher]
@@ -53,7 +76,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getStudentData: () => {
 				// fetching data from the backend
-				fetch("https://3001-brunomorais-buildhomewo-nt2arfayahh.ws-eu46.gitpod.io/api/student")
+				fetch("https://3001-brunomorais-buildhomewo-nt2arfayahh.ws-eu47.gitpod.io/api/student")
 					.then(resp => resp.json())
 					.then(dataStudent => setStore({ 
 						students: [...getStore().students, dataStudent]
