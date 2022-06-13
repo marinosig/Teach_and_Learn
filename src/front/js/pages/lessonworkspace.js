@@ -1,7 +1,11 @@
 import React from "react";
 import screen from "../../img/screen.png";
+import { useContext, useEffect } from "react"
+import { Context } from "../store/appContext";
 
 export const Lessonworkspace = () => {
+  const { store, actions } = useContext(Context);
+
   return (
     <div>
       <div className="p-4 p-md-5 pb-4 text-white rounded bg-dark d-flex row flex-lg-row">
@@ -30,6 +34,7 @@ export const Lessonworkspace = () => {
               Suject
             </label>
             <input
+              id="lessonContent_subject"
               type="text"
               className="form-control"
               placeholder="Subject of the lesson"
@@ -40,6 +45,7 @@ export const Lessonworkspace = () => {
               Title
             </label>
             <input
+              id="lessonContent_title"
               type="text"
               className="form-control"
               placeholder="Title of the lesson"
@@ -50,10 +56,11 @@ export const Lessonworkspace = () => {
               Professor
             </label>
             <input
+              id="lessonContent_teacher"
               type="text"
               className="form-control"
               placeholder="Your Name"
-              disabled
+
             />
           </div>
         </div>
@@ -62,6 +69,7 @@ export const Lessonworkspace = () => {
             Introduction
           </label>
           <textarea
+            id="lessonContent_introduction"
             type="textarea"
             className="form-control"
             rows="3"
@@ -74,6 +82,7 @@ export const Lessonworkspace = () => {
             Main Part
           </label>
           <textarea
+            id="lessonContent_mainpart"
             type="textarea"
             className="form-control"
             rows="10"
@@ -86,6 +95,7 @@ export const Lessonworkspace = () => {
             Summary
           </label>
           <textarea
+            id="lessonContent_summary"
             type="text"
             className="form-control mb-2"
             rows="2"
@@ -118,9 +128,9 @@ export const Lessonworkspace = () => {
           />
         </div>
         <div className="d-flex justify-content-center">
-          <button type="submit" className="btn btn-warning fs-5 px-5 my-5">
+          <button type="submit" className="btn btn-warning fs-5 px-5 my-5" onClick={actions.postLessonsData}>
             Submit
-            {/* Submit function */}
+        
           </button>
         </div>
       </form>

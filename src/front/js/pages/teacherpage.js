@@ -8,6 +8,16 @@ import PropTypes from "prop-types";
 
 export const Teacherpage = () => {
   const { store, actions } = useContext(Context);
+
+  // const listOfTeachers = store?.teachers?.[0]?.teachers.map((teacher, indexT) => {
+    
+  //   return (
+  //     <div key={indexT}>
+  //         {teacher.id}
+  //     </div>
+  //   )
+  // })
+
   const listOfLessons = store?.lessons?.[0]?.lessons.map((lesson, index) => {
     return (
       <div key={index}>
@@ -32,7 +42,7 @@ export const Teacherpage = () => {
             </div>
             <div className="m-auto text-white">
               <h2 className="p-3 text-warning text-center flex-wrap">
-                "Son Goku"
+                {/* {listOfTeachers} */} Son Goku
               </h2>
               <h4 className="p-2 text-center border-bottom border-warning">
                 Subjects:
