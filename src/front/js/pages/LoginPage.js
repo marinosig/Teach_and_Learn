@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-
 import { Link } from "react-router-dom";
 import "../../styles/style.css";
 
@@ -57,14 +56,14 @@ export const LoginPage = () => {
                 <div className="logo mb-3">
                   <div className="col-md-12 text-center">
                     <h3>
-                      <i class="fa fa-user fa-4x"></i>
+                      <i className="fa fa-user fa-4x"></i>
                     </h3>
                     <h1>Login</h1>
                   </div>
                 </div>
                 <form>
                   <div className="form-group">
-                    <label for="InputEmail1">Email address</label>
+                    <label>Email address</label>
                     <input
                       type="Email"
                       name="Email"
@@ -77,7 +76,7 @@ export const LoginPage = () => {
                     />
                   </div>
                   <div className="form-group">
-                    <label for="InputPassword">Password</label>
+                    <label>Password</label>
                     <input
                       type="Password"
                       name="Password"
@@ -104,26 +103,26 @@ export const LoginPage = () => {
                       <span className="span-or">or</span>
                     </div>
                   </div>
-                  <div className="col-md-12 mb-3">
+                  {/* <div className="col-md-12 mb-3">
                     <p className="text-center">
-                      <a href="javascript:void();" className="google btn mybtn">
+                       <a href="javascript:void();" className="google btn mybtn"> 
                         <i className="fa fa-google-plus"></i> Signup using
                         Google
                       </a>
                     </p>
-                  </div>
+                  </div> */}
                   <div className="form-group">
                     <p className="text-center">
                       Don't have account?{" "}
                       <Link to="/SignupPage">
-                        <a id="signup">Sign up here</a>
+                        Sign up here
                       </Link>
                     </p>
                   </div>
                   <div className="form-group">
                     <p className="text-center">
                       <Link to="/ForgetPassword">
-                        <a id="Forget">Forget Password</a>
+                        Forget Password
                       </Link>
                     </p>
                   </div>

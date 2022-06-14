@@ -80,7 +80,7 @@ export const SignupPage = () => {
     console.log(e.target.value);
     setSurnames(e.target.value);
   };
-  
+
   const onTypeFunInfo = (e) => {
     console.log(e.target.value);
     setFuninfo(e.target.value);
@@ -90,7 +90,7 @@ export const SignupPage = () => {
     console.log(e.target.value);
     setSubjects(e.target.value);
   };
-  
+
   const onTypeWhyYouTeach = (e) => {
     console.log(e.target.value);
     setWhyyouteach(e.target.value);
@@ -99,47 +99,44 @@ export const SignupPage = () => {
   const onTypeYearsOfExperience = (e) => {
     console.log(e.target.value);
     SetYearsexperience(e.target.value);
-  };  
+  };
 
   const onTypeIsTeacher = (e) => {
-
-    if (e.target.checked) { setTeacher(false) }
-    else { setTeacher(true) };
+    if (e.target.checked) {
+      setTeacher(false);
+    } else {
+      setTeacher(true);
+    }
     console.log(e.target.value);
     console.log(document.getElementById("confirm_teacher").value);
   };
 
   const signupForm = () => {
-    console.log("teste")
-    setSignupteacher(!signupteacher)
-
-  }
+    console.log("teste");
+    setSignupteacher(!signupteacher);
+  };
 
   const submit = () => {
     if (signupteacher == false) {
-      actions.postUserData()
-      actions.postStudentData()
-      window.location.reload()
-      
+      actions.postUserData();
+      actions.postStudentData();
+      window.location.reload();
+    } else {
+      actions.postUserData();
+      actions.postTeacherData();
+      window.location.reload();
     }
-    else {
-      actions.postUserData()
-      actions.postTeacherData()
-      window.location.reload()
-    }
-  }
+  };
 
   return (
     <>
-    <br></br>
+      <br></br>
       <div className="container">
         <div className="col-md-5 mx-auto">
           <div className="myform">
             <div className="logo mb-3">
               <div className="col-md-12 text-center">
-                <h3>
-                  {/* <i className="fa fa-user-plus fa-2x"></i> */}
-                </h3>
+                <h3>{/* <i className="fa fa-user-plus fa-2x"></i> */}</h3>
                 <h1>SignUp Form</h1>
               </div>
             </div>
@@ -223,80 +220,81 @@ export const SignupPage = () => {
                   onChange={onTypeIsTeacher} /> If you are a Teacher click here
               </label>
             </div> */}
-            
-             <div className="col-md-12 text-center mb-3">
-              
+
+            <div className="col-md-12 text-center mb-3">
               {signupteacher === true ? (
-              <div>
-             
-                <div className="form-group">
-              {/* <label>Email address</label> */}
-              <input
-                type="fun_info"
-                name="fun_info"
-                className="form-control"
-                id="fun_info"
-                aria-describedby="fun_info"
-                placeholder="Enter some Fun Information about You"
-                value={funinfo}
-                onChange={onTypeFunInfo}
-              />
+                <div>
+                  <div className="form-group">
+                    {/* <label>Email address</label> */}
+                    <input
+                      type="fun_info"
+                      name="fun_info"
+                      className="form-control"
+                      id="fun_info"
+                      aria-describedby="fun_info"
+                      placeholder="Enter some Fun Information about You"
+                      value={funinfo}
+                      onChange={onTypeFunInfo}
+                    />
+                  </div>
+                  <p></p>
+                  <div className="form-group">
+                    {/* <label>Password</label> */}
+                    <input
+                      type="subjects"
+                      name="subjects"
+                      id="subjects"
+                      className="form-control"
+                      aria-describedby="subjects"
+                      placeholder="Enter the Subjects that You Teach"
+                      value={subjects}
+                      onChange={onTypeSubjects}
+                    />
+                  </div>
+                  <p></p>
+                  <div className="form-group">
+                    {/* <label>Conform Password</label> */}
+                    <input
+                      type="why_you_teach"
+                      name="why_you_teach"
+                      id="why_you_teach"
+                      className="form-control"
+                      aria-describedby="why_you_teach"
+                      placeholder="Enter a few words about Why You Teach"
+                      value={whyyouteach}
+                      onChange={onTypeWhyYouTeach}
+                    />
+                  </div>
+                  <p></p>
+                  <div className="form-group">
+                    {/* <label>Enter First Name</label> */}
+                    <input
+                      type="years_experience"
+                      name="years_experience"
+                      id="years_experience"
+                      className="form-control"
+                      aria-describedby="years_experience"
+                      placeholder="Enter the Years Of Experience that You have"
+                      value={yearsexperience}
+                      onChange={onTypeYearsOfExperience}
+                    />
+                  </div>
+                </div>
+              ) : null}
             </div>
-            <p></p>
-            <div className="form-group">
-              {/* <label>Password</label> */}
-              <input
-                type="subjects"
-                name="subjects"
-                id="subjects"
-                className="form-control"
-                aria-describedby="subjects"
-                placeholder="Enter the Subjects that You Teach"
-                value={subjects}
-                onChange={onTypeSubjects}
-              />
-            </div>
-            <p></p>
-            <div className="form-group">
-              {/* <label>Conform Password</label> */}
-              <input
-                type="why_you_teach"
-                name="why_you_teach"
-                id="why_you_teach"
-                className="form-control"
-                aria-describedby="why_you_teach"
-                placeholder="Enter a few words about Why You Teach"
-                value={whyyouteach}
-                onChange={onTypeWhyYouTeach}
-              />
-            </div>
-            <p></p>
-            <div className="form-group">
-              {/* <label>Enter First Name</label> */}
-              <input
-                type="years_experience"
-                name="years_experience"
-                id="years_experience"
-                className="form-control"
-                aria-describedby="years_experience"
-                placeholder="Enter the Years Of Experience that You have"
-                value={yearsexperience}
-                onChange={onTypeYearsOfExperience}
-              />
-            </div>
-              </div>) : null}
-             </div>
-             <div className="col-md-12 text-center mb-3">
-             <button
+            <div className="col-md-12 text-center mb-3">
+              <button
                 type="submit"
                 className=" btn btn-block mybtn btn-warning tx-tfm"
                 onClick={signupForm}
               >
-               {signupteacher ? "If You are only a Student Click Here" : "If You are a Teacher Click Here"} 
+                {signupteacher
+                  ? "If You are only a Student Click Here"
+                  : "If You are a Teacher Click Here"}
               </button>
-              </div>
-             
-             <div className="col-md-12 text-center mb-3 ">
+            </div>
+
+            <div className="col-md-12 text-center mb-3 ">
               <button
                 type="submit"
                 className=" btn btn-block mybtn btn-dark tx-tfm"
@@ -304,7 +302,7 @@ export const SignupPage = () => {
               >
                 submit
               </button>
-             </div>
+            </div>
             {/* <div className="col-md-12 ">
               <div className="form-group">
                 <p className="text-center">
