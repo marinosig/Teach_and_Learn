@@ -9,25 +9,25 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask import Flask
 from flask_cors import CORS
-
+from flask_jwt_extended import current_user
+from hmac import compare_digest
 
 
 api = Blueprint('api', __name__)
 
 
-@api.route("/login", methods=["POST"])
+@api.route("/login", methods=["POST","GET"])
 def login():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-
-    print( email)
-    print(password)
    
-    if email != "test" or password != "test":
-        return jsonify({"msg": "Bad username or password"}), 401
+    users = User.query.filter_by(email=email).one_or_none()
+    if not users or not users.check_password(password):
+        return jsonify("Wrong email or password"), 401
 
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
+
 
 
 
