@@ -16,7 +16,7 @@ from hmac import compare_digest
 api = Blueprint('api', __name__)
 
 
-@api.route("/login", methods=["POST","GET"])
+@api.route("/login", methods=["POST"])
 def login():
     email = request.json.get("email", None)
     password = request.json.get("password", None)

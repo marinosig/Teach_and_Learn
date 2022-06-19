@@ -15,6 +15,7 @@ import { Lounge } from "./pages/lounge";
 import { Lesson } from "./pages/lesson";
 import { Teacherpage } from "./pages/teacherpage";
 import { Lessonworkspace } from "./pages/lessonworkspace";
+import { UpdatePassword } from "./pages/Updatepassword";
 import { useState } from "react";
 
 //create your first component
@@ -68,6 +69,9 @@ const Layout = () => {
             </Route>
             <Route exact path="/single/:theid">
               <Single />
+            </Route>
+            <Route exact path="/updatepassword">
+              <UpdatePassword />
             </Route>
             <Route>
               <h1>Not found!</h1>
