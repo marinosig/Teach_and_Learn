@@ -12,9 +12,9 @@ export const UpdatePassword = () => {
                 <div className="logo mb-3">
                   <div className="col-md-12 text-center">
                     <h3>
-                      <i className="fa fa-user fa-4x"></i>
+                      <i class="fa fa-solid fa-key fa-3x"></i>
                     </h3>
-                    <h1>UpdatePassword</h1>
+                    <h1>Update Password</h1>
                   </div>
                 </div>
                 <form>
