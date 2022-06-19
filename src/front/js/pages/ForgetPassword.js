@@ -3,21 +3,6 @@ import { Link } from "react-router-dom";
 import "../../styles/style.css";
 
 export const ForgetPassword = () => {
-  const onTypeEmail = (e) => {
-    console.log(e.target.value);
-    setEmail(e.target.value);
-  };
-  const onSubmit = (e) => {
-    e.preventDefault();
-    send("User ID")
-      .then((response) => {
-        console.log("SUCCESS!", response.status, response.text);
-      })
-      .catch((err) => {
-        console.log("FAILED...", err);
-      });
-  };
-
   return (
     <>
       <div className="container">
@@ -49,8 +34,6 @@ export const ForgetPassword = () => {
                               id="Email"
                               name="Email"
                               placeholder="Email address"
-                              value={email}
-                              onChange={onTypeEmail}
                               className="form-control"
                               type="Email"
                             />
@@ -62,8 +45,6 @@ export const ForgetPassword = () => {
                             name="recover-submit"
                             className="btn btn-lg btn-primary btn-block"
                             type="submit"
-                            value={ResetPassword}
-                            onChange={onSubmit}
                           >
                             Reset Password
                           </label>
