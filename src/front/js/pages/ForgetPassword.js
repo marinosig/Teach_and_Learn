@@ -1,8 +1,24 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/style.css";
+import { BASE_URL } from "../store/flux";
 
 export const ForgetPassword = () => {
+  const [email, setEmail] = useState("");
+  const submitForgetPassword = (e) => {
+    e.preventDefault();
+
+    axios
+      .post(BASE_URL + "/forgetpassword", { email })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <div className="container">
@@ -24,6 +40,7 @@ export const ForgetPassword = () => {
                         autocomplete="off"
                         className="form"
                         method="post"
+                        onSubmit={submitForgetPassword}
                       >
                         <div className="form-group">
                           <div className="input-group">
@@ -36,6 +53,8 @@ export const ForgetPassword = () => {
                               placeholder="Email address"
                               className="form-control"
                               type="Email"
+                              onChange={(e) => setEmail(e.target.value)}
+                              value={email}
                             />
                           </div>
                         </div>
@@ -43,7 +62,7 @@ export const ForgetPassword = () => {
                           <label
                             id="Updatepassword"
                             name="recover-submit"
-                            className="btn btn-lg btn-primary btn-block"
+                            className="btn btn-lg btn-primary btn-block mt-3"
                             type="submit"
                           >
                             Reset Password

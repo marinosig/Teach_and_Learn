@@ -70,7 +70,7 @@ const Layout = () => {
             <Route exact path="/single/:theid">
               <Single />
             </Route>
-            <Route exact path="/updatepassword">
+            <Route path="/updatepassword/:id">
               <UpdatePassword />
             </Route>
             <Route>
