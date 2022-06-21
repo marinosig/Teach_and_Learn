@@ -8,15 +8,15 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask import Flask
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from flask_jwt_extended import current_user
 from hmac import compare_digest
 
 
 api = Blueprint('api', __name__)
-
-
+CORS(api) # enable CORS on the API_v1 blue print
 @api.route("/login", methods=["POST"])
+@cross_origin(allow_headers=['Access-Control-Allow-Origin'])
 def login():
     email = request.json.get("email", None)
     password = request.json.get("password", None)

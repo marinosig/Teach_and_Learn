@@ -1,5 +1,5 @@
 export const BASE_URL =
-  "https://3001-marinosig-teachandlearn-tkoclkz4swc.ws-eu47.gitpod.io/";
+  "https://3001-marinosig-teachandlearn-lrqvh83t70m.ws-eu47.gitpod.io";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
