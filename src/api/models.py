@@ -1,6 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
+from hmac import compare_digest
 
 db = SQLAlchemy()
+
+
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -12,8 +15,16 @@ class User(db.Model):
 #     last_name = db.Column(db.String(100), nullable=False)
 #     #is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
+    def check_password(self, password):
+        return compare_digest(password, "password")
+     # identity when creating JWTs and converts it to a JSON serializable format.
+
+   
+
     def __repr__(self):
         return f'<User {self.email}>'
+
+    
 
     def serializeUser(self):
         return {
@@ -124,4 +135,3 @@ class Lesson_Content(db.Model):
             
 
         }
-
