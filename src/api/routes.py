@@ -29,6 +29,37 @@ def login():
     return jsonify(access_token=access_token)
 
 
+# @api.route("/forgetpassword", methods=["POST"])
+# def forgetpassword():
+#     email = request.json.get("email", None)
+#     password = request.json.get("password", None)
+#     print(email)
+
+#     users = User.query.filter_by(email=email).one_or_none()
+#     if not users:
+#         return jsonify("Wrong email is wrong"), 401
+
+#     access_token = create_access_token(identity=email)
+#     return jsonify("https://3000-marinosig-teachandlearn-v7nv3kai4yk.ws-eu47.gitpod.io/updatepassword/"+users.id)
+
+# @auth.route('/signup', methods=['POST'])
+# def signup_post():
+    
+#     email = request.form.get('email')
+#     name = request.form.get('name')
+#     password = request.form.get('password')
+
+#     user = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
+
+#     if user: # if a user is found, we want to redirect back to signup page so user can try again
+#         return redirect(url_for('auth.signup'))
+
+    
+#     new_user = User(email=email, name=name, password=generate_password_hash(password, method=''))
+#     db.session.add(new_user)
+#     db.session.commit()
+
+#     return redirect(url_for('auth.login'))
 
 
 @api.route('/users', methods=['GET'])
