@@ -44,7 +44,7 @@ MIGRATE = Migrate(app, db, compare_type = True)
 db.init_app(app)
 
 # Allow CORS requests to this API
-CORS(app)
+CORS(app, resources=r'/api/*')
 
 # add the admin
 setup_admin(app)
@@ -66,6 +66,14 @@ def sitemap():
     if ENV == "development":
         return generate_sitemap(app)
     return send_from_directory(static_file_dir, 'index.html')
+
+@app.after_request
+def apply_caching(response):
+    response.headers["X-Frame-Options"] = "SAMEORIGIN"
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Credentials'] = True
+    response.headers['Access-Control-Allow-Headers'] = '*'
+    return response
 
 # any other endpoint will try to serve it like a static file
 @app.route('/<path:path>', methods=['GET'])
