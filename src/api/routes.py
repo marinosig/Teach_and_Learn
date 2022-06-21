@@ -10,10 +10,12 @@ from flask_jwt_extended import jwt_required
 from flask import Flask
 from flask_cors import CORS
 from flask_jwt_extended import current_user
-from hmac import compare_digest
+from hmac import compare_digest,new
 
 
 api = Blueprint('api', __name__)
+
+
 
 
 @api.route("/login", methods=["POST"])
@@ -22,44 +24,52 @@ def login():
     password = request.json.get("password", None)
    
     users = User.query.filter_by(email=email).one_or_none()
-    if not users or not users.check_password(password):
+    print(users.serializeUser())
+
+    if email !=  users.serializeUser()['email'] or password !=  users.serializeUser()['password']:
         return jsonify("Wrong email or password"), 401
 
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
-
-# @api.route("/forgetpassword", methods=["POST"])
-# def forgetpassword():
-#     email = request.json.get("email", None)
+# @api.route("/resetpassword", methods=["POST"])
+# def resetpassword():
+#     id = request.json.get("id", None)
 #     password = request.json.get("password", None)
-#     print(email)
 
-#     users = User.query.filter_by(email=email).one_or_none()
-#     if not users:
-#         return jsonify("Wrong email is wrong"), 401
+#     # users = User.query.filter_by(email=email).one_or_none()
+#     # user = User.query.filter_by(id=id)
+#     # if password != None:
+#     #     user.password = password
+#     #     user.session.commit()
 
-#     access_token = create_access_token(identity=email)
-#     return jsonify("https://3000-marinosig-teachandlearn-v7nv3kai4yk.ws-eu47.gitpod.io/updatepassword/"+users.id)
+#     # db.update(User).where(User.c.id=id).values(password=password)
+#     user = User.query.filter_by(id=id)
+#     print(user)
+#     if password != None:
+#         user.password = password
 
-# @auth.route('/signup', methods=['POST'])
-# def signup_post():
-    
-#     email = request.form.get('email')
-#     name = request.form.get('name')
-#     password = request.form.get('password')
-
-#     user = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
-
-#     if user: # if a user is found, we want to redirect back to signup page so user can try again
-#         return redirect(url_for('auth.signup'))
-
-    
-#     new_user = User(email=email, name=name, password=generate_password_hash(password, method=''))
-#     db.session.add(new_user)
 #     db.session.commit()
+#     # return 'success, the infromation has been updated'
+            
+#     return jsonify({'results': user.serializeUser()}),200
+   
+#     # return jsonify("your password change successfully")
 
-#     return redirect(url_for('auth.login'))
+@api.route("/forgetpassword", methods=["POST"])
+def forgetpassword():
+    email = request.json.get("email", None)
+
+    users = User.query.filter_by(email=email).one_or_none()
+
+    
+    if not users: 
+        return jsonify({"msg": "Email is not exist"}), 401
+
+    return jsonify(link="https://3000-marinosig-teachandlearn-c3mer03e58e.ws-eu47.gitpod.io/updatepassword/"+str(users.serializeUser()['id']))
+
+
+
 
 
 @api.route('/users', methods=['GET'])
@@ -89,12 +99,15 @@ def add_user():
 
     new_user = User(
         email = email_request,
-        password = password_request, 
+        # password = new(password_request,"password") , 
+        password = password_request , 
         student_or_teacher = student_or_teacher_request
     )
 
-    db.session.add(new_user)
-    db.session.commit()
+    print(new_user)
+    new_user.create()
+    # db.session.add(new_user)
+    # db.session.commit()
     return "User Added", 200
 
 @api.route('/lessons', methods=['GET'])

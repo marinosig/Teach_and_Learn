@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from hmac import compare_digest
+from hmac import compare_digest,new
 
 db = SQLAlchemy()
 
@@ -19,10 +19,24 @@ class User(db.Model):
         return compare_digest(password, "password")
      # identity when creating JWTs and converts it to a JSON serializable format.
 
+    def create_password(self, password):
+        return new(password, "password")
    
 
     def __repr__(self):
         return f'<User {self.email}>'
+
+    def create(self):
+        # este usuario existe?
+        # si? retorna, error, el usuario ya existe
+
+
+        # return 'error, el usuario ya existe'
+        
+        # no? crealo
+        db.session.add(self)
+        db.session.commit()
+        return 'success'
 
     
 
