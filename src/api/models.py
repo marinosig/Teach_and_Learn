@@ -27,14 +27,12 @@ class User(db.Model):
         return f'<User {self.email}>'
 
     def create(self):
-        # este usuario existe?
-        # si? retorna, error, el usuario ya existe
-
-
-        # return 'error, el usuario ya existe'
-        
-        # no? crealo
         db.session.add(self)
+        db.session.commit()
+        return 'success'
+
+    def update(self,password):
+        self.password=password
         db.session.commit()
         return 'success'
 

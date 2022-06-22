@@ -22,7 +22,7 @@ def login():
     password = request.json.get("password", None)
    
     users = User.query.filter_by(email=email).one_or_none()
-    print(users.serializeUser())
+    # print(users.serializeUser())
 
     if email !=  users.serializeUser()['email'] or password !=  users.serializeUser()['password']:
         return jsonify("Wrong email or password"), 401
@@ -30,33 +30,22 @@ def login():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
-# @api.route("/resetpassword", methods=["POST"])
-# def resetpassword():
-#     id = request.json.get("id", None)
-#     password = request.json.get("password", None)
+@api.route("/updatepassword", methods=["POST"])
+def updatepassword():
+    id = request.json.get("id", None)
+    password = request.json.get("password", None)
 
-#     # users = User.query.filter_by(email=email).one_or_none()
-#     # user = User.query.filter_by(id=id)
-#     # if password != None:
-#     #     user.password = password
-#     #     user.session.commit()
+    user = User.query.filter_by(id=id).first()
+    user.update(password)
 
-#     # db.update(User).where(User.c.id=id).values(password=password)
-#     user = User.query.filter_by(id=id)
-#     print(user)
-#     if password != None:
-#         user.password = password
-
-#     db.session.commit()
-#     # return 'success, the infromation has been updated'
-            
-#     return jsonify({'results': user.serializeUser()}),200
+    return jsonify('results'),200
    
-#     # return jsonify("your password change successfully")
+
 
 @api.route("/forgetpassword", methods=["POST"])
 def forgetpassword():
     email = request.json.get("email", None)
+    web_link = request.json.get("web_link", None)
 
     users = User.query.filter_by(email=email).one_or_none()
 
@@ -64,7 +53,7 @@ def forgetpassword():
     if not users: 
         return jsonify({"msg": "Email is not exist"}), 401
 
-    return jsonify(link="https://3000-marinosig-teachandlearn-c3mer03e58e.ws-eu47.gitpod.io/updatepassword/"+str(users.serializeUser()['id']))
+    return jsonify(link=web_link+str(users.serializeUser()['id']))
 
 
 
