@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { BASE_URL } from "../store/flux";
 
 export const UpdatePassword = () => {
   const { id } = useParams();
@@ -8,16 +9,44 @@ export const UpdatePassword = () => {
 
   const submitPassword = (e) => {
     e.preventDefault();
+
+    if (!newPassword.trim()) {
+      return alert("please enter password");
+    }
+
     if (newPassword !== confirmPassword) {
       return alert("Your password is not metch with confirm password.");
     }
 
-    const requestData = {
-      id: id,
-      password: newPassword,
+    // fetch
+    const post = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Headers":
+          "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      },
+      crossDomain: true,
+      redirect: "follow",
+      body: JSON.stringify({
+        id: id,
+        password: newPassword,
+      }),
     };
 
-    console.log(requestData);
+    fetch(BASE_URL + "/api/updatepassword", post)
+      .then((resp) => resp.json())
+      .then((res) => {
+        alert("password updated successfully.");
+        setNewPassword("");
+        setConfirmPassword("");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -35,7 +64,12 @@ export const UpdatePassword = () => {
                     <h1>Update Password</h1>
                   </div>
                 </div>
-                <form onSubmit={submitPassword} action="#" method="POST">
+                <form
+                  onSubmit={submitPassword}
+                  action="#"
+                  method="POST"
+                  id="updateform"
+                >
                   <div className="form-group">
                     <label htmlFor="InputPassword">NewPassword</label>
                     <input
@@ -67,6 +101,7 @@ export const UpdatePassword = () => {
                     <button
                       type="submit"
                       className=" btn btn-block mybtn btn-primary tx-tfm"
+                      form="updateform"
                     >
                       submit
                     </button>

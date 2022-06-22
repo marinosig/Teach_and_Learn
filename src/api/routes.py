@@ -8,12 +8,12 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask import Flask
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from flask_jwt_extended import current_user
-from hmac import compare_digest
-
+from hmac import compare_digest,new
 
 api = Blueprint('api', __name__)
+
 
 
 @api.route("/login", methods=["POST"])
@@ -22,44 +22,41 @@ def login():
     password = request.json.get("password", None)
    
     users = User.query.filter_by(email=email).one_or_none()
-    if not users or not users.check_password(password):
+    # print(users.serializeUser())
+
+    if email !=  users.serializeUser()['email'] or password !=  users.serializeUser()['password']:
         return jsonify("Wrong email or password"), 401
 
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
+@api.route("/updatepassword", methods=["POST"])
+def updatepassword():
+    id = request.json.get("id", None)
+    password = request.json.get("password", None)
 
-# @api.route("/forgetpassword", methods=["POST"])
-# def forgetpassword():
-#     email = request.json.get("email", None)
-#     password = request.json.get("password", None)
-#     print(email)
+    user = User.query.filter_by(id=id).first()
+    user.update(password)
 
-#     users = User.query.filter_by(email=email).one_or_none()
-#     if not users:
-#         return jsonify("Wrong email is wrong"), 401
+    return jsonify('results'),200
+   
 
-#     access_token = create_access_token(identity=email)
-#     return jsonify("https://3000-marinosig-teachandlearn-v7nv3kai4yk.ws-eu47.gitpod.io/updatepassword/"+users.id)
 
-# @auth.route('/signup', methods=['POST'])
-# def signup_post():
-    
-#     email = request.form.get('email')
-#     name = request.form.get('name')
-#     password = request.form.get('password')
+@api.route("/forgetpassword", methods=["POST"])
+def forgetpassword():
+    email = request.json.get("email", None)
+    web_link = request.json.get("web_link", None)
 
-#     user = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
-
-#     if user: # if a user is found, we want to redirect back to signup page so user can try again
-#         return redirect(url_for('auth.signup'))
+    users = User.query.filter_by(email=email).one_or_none()
 
     
-#     new_user = User(email=email, name=name, password=generate_password_hash(password, method=''))
-#     db.session.add(new_user)
-#     db.session.commit()
+    if not users: 
+        return jsonify({"msg": "Email is not exist"}), 401
 
-#     return redirect(url_for('auth.login'))
+    return jsonify(link=web_link+str(users.serializeUser()['id']))
+
+
+
 
 
 @api.route('/users', methods=['GET'])
@@ -89,12 +86,15 @@ def add_user():
 
     new_user = User(
         email = email_request,
-        password = password_request, 
+        # password = new(password_request,"password") , 
+        password = password_request , 
         student_or_teacher = student_or_teacher_request
     )
 
-    db.session.add(new_user)
-    db.session.commit()
+    print(new_user)
+    new_user.create()
+    # db.session.add(new_user)
+    # db.session.commit()
     return "User Added", 200
 
 @api.route('/lessons', methods=['GET'])

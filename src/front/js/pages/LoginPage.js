@@ -38,7 +38,13 @@ export const LoginPage = ({ setToken }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Headers":
+          "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
       },
+      crossDomain: true,
       redirect: "follow",
       body: JSON.stringify({
         email: email,
